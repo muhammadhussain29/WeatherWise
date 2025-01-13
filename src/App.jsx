@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from './components/Navbar';
-
+import Body from './components/Body';
 
 const App = () => {
   // const options = {
@@ -37,13 +37,22 @@ const App = () => {
   //   result();
   // }, [
 
+ // State to handle dark mode
+ const [isDarkMode, setIsDarkMode] = useState(false);
 
+ // Function to toggle dark mode
+ const switchDarkMode = () => {
+   setIsDarkMode((prevMode) => !prevMode);
+ };
 
 
   return (
-    <>
-      <Navbar/>
-    </>
+    <div className={`w-full h-screen px-5 py-4 ${
+        isDarkMode ? 'dark-bg' : 'light-bg'
+      }`}>
+      <Navbar isDarkMode={isDarkMode} switchDarkMode={switchDarkMode}/>
+      <Body isDarkMode={isDarkMode} switchDarkMode={switchDarkMode}/>
+    </div>
   );
 };
 
