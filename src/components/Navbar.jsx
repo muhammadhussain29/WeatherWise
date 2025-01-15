@@ -12,7 +12,7 @@ const Navbar = (props) => {
 
   return (
     <nav
-      className={`flex justify-between items-center px-10 py-3 mb-4 rounded-xl ${ props.isDarkMode ? 'dark-bg-contrast' : 'light-bg-contrast'}`}
+      className={`flex justify-between items-center px-10 py-3 mb-4 rounded-xl ${ props.isDarkMode ? 'dark-bg-contrast dark-shadow' : 'light-bg-contrast light-shadow'}`}
     >
       {/* LOGO */}
       <div className={`capitalize text-3xl font-bold ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>WeatherWise</div>
@@ -29,7 +29,7 @@ const Navbar = (props) => {
           onChange={handleSearch}
           className="outline-none border-none w-[400px]"
         />
-        <button type="submit" className={`flex items-center p-2 ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>
+        <button type="submit" className={`flex items-center p-2 hover:scale-125 transition-all ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>
           <FaSearch />
         </button>
       </form>

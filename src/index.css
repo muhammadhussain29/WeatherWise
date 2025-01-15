@@ -9,29 +9,36 @@ body{
 
 /* Theme */
 .light-bg{
-    background-color: #F0F8FF;
+    background-color: #FFFFFF;
     transition: 0.2s;
 }
 .light-bg-contrast{
-    background-color: #b2edff;
+    background-color:  #dedede;
+    transition: 0.2s;
+}
+.light-bg-primary{
+    background-color: #6C757D;
     transition: 0.2s;
 }
 .light-primary{
-    color: #FF7A59;
+    color: #007BFF;
     transition: 0.2s;
 }
 .light-secondary{
-    color: #333333;
+    color: #6C757D;
     transition: 0.2s;
 }
 .light-btn{
-    background-color: #FF7A59;
+    background-color: #FFC107;
     color: #E3F6FC;
     transition: 0.2s;
 }
 .light-btn:hover{
     background-color: #ff653e;
     transform: scale(1.05);
+}
+.light-shadow{
+    box-shadow: 0 5px 10px 1px rgba(0,0,0,0.3);
 }
 /* --------------------------------------------------------------------- */
 .dark-bg{
@@ -40,6 +47,10 @@ body{
 }
 .dark-bg-contrast{
     background-color: #081d33;
+    transition: 0.2s;
+}
+.dark-bg-primary{
+    background-color: #E8F0FF;
     transition: 0.2s;
 }
 .dark-primary{
@@ -58,4 +69,7 @@ body{
 .dark-btn:hover{
     background-color: #00bfd4;
     transform: scale(1.05);
+}
+.dark-shadow{
+    box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.5);
 }

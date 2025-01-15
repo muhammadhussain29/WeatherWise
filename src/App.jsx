@@ -4,55 +4,110 @@ import Navbar from './components/Navbar';
 import Body from './components/Body';
 
 const App = () => {
-  const options = {
-    method: 'GET',
-    url: 'https://yahoo-weather5.p.rapidapi.com/weather',
-    params: {
-      location: 'islamabad',
-      format: 'json',
-      u: 'c'
-    },
-    headers: {
-      // 'x-rapidapi-key': 'b23f1471f5msh7e3ff14218c3251p145e80jsnfa1d1b6f02e6',
-      'x-rapidapi-key': '706f5ebbecmsh149114f2bf43afdp1a6329jsn0dd215c8fc80',
-      'x-rapidapi-host': 'yahoo-weather5.p.rapidapi.com'
+  const [city, setCity] = useState(""); // Holds the city name
+  const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode toggle
+
+  // Function to toggle dark mode
+  const switchDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
+  // Function to fetch user's location
+  const handleLocationClick = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+      console.log("Geolocation not supported");
     }
   };
-  const result = async () => {
+
+  // Callback when location is successfully fetched
+  const success = async (position) => {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+    // Convert lat/lon to city using OpenCage API
+    const apiKey = "e213e96b2cf94d67b33c2f2a8f19a7f0";
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`;
+
+    try {
+      const response = await axios.get(url);
+      const location =
+        response.data.results[0].components.city ||
+        response.data.results[0].components.town ||
+        response.data.results[0].components.village;
+
+      if (location) {
+        setCity(location); // Update city state
+      } else {
+        console.error("Location not found");
+      }
+    } catch (error) {
+      console.error("Error fetching geocoding data:", error);
+    }
+  };
+
+  // Callback if location fetching fails
+  const error = (e) => {
+    console.error("Error fetching location:", e);
+  };
+
+  // Function to fetch weather data
+  const fetchWeatherData = async () => {
+    const options = {
+      method: "GET",
+      url: "https://yahoo-weather5.p.rapidapi.com/weather",
+      params: {
+        location: city,
+        format: "json",
+        u: "c",
+      },
+      headers: {
+        "x-rapidapi-key": "706f5ebbecmsh149114f2bf43afdp1a6329jsn0dd215c8fc80",
+        "x-rapidapi-host": "yahoo-weather5.p.rapidapi.com",
+      },
+    };
+
     try {
       const response = await axios.request(options);
-      console.log('Weather Data:', response.data);
+      console.log("Weather Data:", response.data);
 
-      console.log("humidity: ", response.data.current_observation.atmosphere.humidity);
-      console.log("visibility: ", response.data.current_observation.atmosphere.visibility);
-      console.log("pressure: ", response.data.current_observation.atmosphere.pressure);
-      console.log("Temperature: ", response.data.current_observation.condition.temperature);
-      console.log("condition: ", response.data.current_observation.condition.text);
-
+      // Example logging weather details
+      const { atmosphere, condition } = response.data.current_observation;
+      console.log("Humidity:", atmosphere.humidity);
+      console.log("Visibility:", atmosphere.visibility);
+      console.log("Pressure:", atmosphere.pressure);
+      console.log("Temperature:", condition.temperature);
+      console.log("Condition:", condition.text);
     } catch (error) {
-      console.error('Error Message:', error.message);
-      console.error('Error Response:', error.response?.data);
+      console.error("Error fetching weather data:", error.message);
     }
   };
+
+  // Effect to fetch location and weather on the first render
   // useEffect(() => {
-  //   result();
-  // }, [])
+  //   const fetchLocationAndWeather = async () => {
+  //     await handleLocationClick(); // Get location
+  //   };
+  //   fetchLocationAndWeather();
+  // }, []);
 
- // State to handle dark mode
- const [isDarkMode, setIsDarkMode] = useState(false);
+  // // Effect to fetch weather when the city changes
+  // useEffect(() => {
+  //   if (city) {
+  //     fetchWeatherData();
+  //   }
+  // }, [city]); 
 
- // Function to toggle dark mode
- const switchDarkMode = () => {
-   setIsDarkMode((prevMode) => !prevMode);
- };
+ 
 
 
   return (
-    <div className={`w-full h-screen px-5 py-4 ${
-        isDarkMode ? 'dark-bg' : 'light-bg'
+    <div className={`w-full h-screen px-5 py-4 ${isDarkMode ? 'dark-bg' : 'light-bg'
       }`}>
-      <Navbar isDarkMode={isDarkMode} switchDarkMode={switchDarkMode}/>
-      <Body isDarkMode={isDarkMode} switchDarkMode={switchDarkMode}/>
+      <Navbar isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} />
+      <Body isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} />
     </div>
   );
 };
