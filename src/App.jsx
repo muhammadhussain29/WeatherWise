@@ -4,8 +4,12 @@ import Navbar from './components/Navbar';
 import Body from './components/Body';
 
 const App = () => {
+  
   const [city, setCity] = useState(""); // Holds the city name
   const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode toggle
+  const [current_observation, setCurrent_observation] = useState("")
+  const [forecasts, setForecasts] = useState("")
+  const [location, setLocation] = useState("")
 
   // Function to toggle dark mode
   const switchDarkMode = () => {
@@ -25,7 +29,6 @@ const App = () => {
   const success = async (position) => {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
-    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
     // Convert lat/lon to city using OpenCage API
     const apiKey = "e213e96b2cf94d67b33c2f2a8f19a7f0";
@@ -74,18 +77,15 @@ const App = () => {
       console.log("Weather Data:", response.data);
 
       // Example logging weather details
-      const { atmosphere, condition } = response.data.current_observation;
-      console.log("Humidity:", atmosphere.humidity);
-      console.log("Visibility:", atmosphere.visibility);
-      console.log("Pressure:", atmosphere.pressure);
-      console.log("Temperature:", condition.temperature);
-      console.log("Condition:", condition.text);
+      setCurrent_observation(response.data.current_observation);
+      setForecasts(response.data.forecasts);
+      setLocation(response.data.location);
     } catch (error) {
       console.error("Error fetching weather data:", error.message);
     }
   };
 
-  // Effect to fetch location and weather on the first render
+  // // Effect to fetch location and weather on the first render
   // useEffect(() => {
   //   const fetchLocationAndWeather = async () => {
   //     await handleLocationClick(); // Get location
@@ -98,16 +98,14 @@ const App = () => {
   //   if (city) {
   //     fetchWeatherData();
   //   }
-  // }, [city]); 
-
- 
+  // }, [city]);  
 
 
   return (
     <div className={`w-full h-screen px-5 py-4 ${isDarkMode ? 'dark-bg' : 'light-bg'
       }`}>
-      <Navbar isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} />
-      <Body isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} />
+      <Navbar isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} setCity={setCity} />
+      <Body isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} location={location} forecasts={forecasts} current_observation={current_observation}/>
     </div>
   );
 };
