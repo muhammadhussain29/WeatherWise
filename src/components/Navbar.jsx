@@ -42,12 +42,12 @@ const Navbar = (props) => {
       className={`flex justify-between items-center px-10 py-3 mb-4 rounded-xl ${props.isDarkMode ? 'dark-bg-contrast dark-shadow' : 'light-bg-contrast light-shadow'
         }`}
     >
-      <div
-        className={`capitalize text-3xl font-bold ${props.isDarkMode ? 'dark-primary' : 'light-primary'
+      <h3
+        className={`capitalize text-2xl font-bold playwrite ${props.isDarkMode ? 'dark-primary' : 'light-primary'
           }`}
       >
         WeatherWise
-      </div>
+      </h3>
 
       <form
         onSubmit={searchCity}
@@ -55,7 +55,7 @@ const Navbar = (props) => {
       >
         <input
           type="search"
-          placeholder="Search City"
+          placeholder="Plan Ahead: Check Weather by City"
           value={search}
           onChange={handleSearch}
           className="outline-none border-none w-[400px]"
@@ -96,7 +96,7 @@ const Navbar = (props) => {
         className={`rounded-xl w-[140px] text-center py-2 ml-16 font-medium ${props.isDarkMode ? 'dark-secondary dark-btn' : 'light-secondary light-btn'
           }`}
       >
-        {props.isDarkMode ? 'Light Theme' : 'Dark Theme'}
+        {props.isDarkMode ? 'Go Light' : 'Go Dark'}
       </button>
     </nav>
   );

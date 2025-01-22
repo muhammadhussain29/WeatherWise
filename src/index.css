@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+IN:wght@100..400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Font */ 
+/* Font ---------------------------------------------------------------------  */ 
 body{
-    font-family: "Montserrat", serif !important;
+    font-family: "Roboto", serif;
 }
-
-/* Theme */
+.playwrite{
+    font-family: "Playwrite IN", serif !important;
+}
+/* Light Theme --------------------------------------------------------------------- */
 .light-bg{
     background-color: #FFFFFF;
     transition: 0.2s;
@@ -40,7 +42,7 @@ body{
 .light-shadow{
     box-shadow: 0 5px 10px 1px rgba(0,0,0,0.3);
 }
-/* --------------------------------------------------------------------- */
+/* Dark Theme --------------------------------------------------------------------- */
 .dark-bg{
     background-color: #0A2540;
     transition: 0.2s;

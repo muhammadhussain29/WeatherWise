@@ -45,13 +45,13 @@ const Main = (props) => {
   return (
     <div className={`h-full w-2/3 mr-5 rounded-xl px-10 py-5 flex flex-col justify-between ${props.isDarkMode ? 'dark-bg-contrast dark-shadow' : 'light-bg-contrast light-shadow'}`}>
       <div>
-        <h2 className={`text-3xl font-medium mb-5 ${ props.isDarkMode ? 'dark-secondary' : 'light-secondary'}`}>Current Weather</h2>
+        <h2 className={`text-3xl font-medium mb-5 ${ props.isDarkMode ? 'dark-secondary' : 'light-secondary'}`}>Today's Weather</h2>
         {/* Main upper section */}
         <div className="flex justify-between items-center">
           {/* Temperature */}
           {/* then text ex: mostly cloudy */}
           <div className='flex flex-col items-center'>
-            <h2 className={`text-8xl font-medium outfit ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>{props.current_observation ? props.current_observation.condition.temperature : "00" }<span>&deg;c</span></h2>
+            <h2 className={`text-9xl font-medium ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>{props.current_observation ? props.current_observation.condition.temperature : "00" }<span>&deg;c</span></h2>
             <div className='flex items-center w-full'>
               <div className={`w-full h-1 bg-black rounded-full ${props.isDarkMode ? 'dark-bg-primary' : 'light-bg-primary'}`}></div>
             <h4 className={`text-4xl outfit mx-2 text-nowrap ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>{props.current_observation ? props.current_observation.condition.text : "------" }</h4>
