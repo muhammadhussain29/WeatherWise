@@ -1,14 +1,46 @@
 import React from 'react'
 import WeatherBox from './WeatherBox';
-import Sun from '../assets/sun.png';
+import Sunny from '../assets/sunny.png';
 import Cloudy from '../assets/cloudy.png';
-import Rain from '../assets/heavy-rain.png';
-import Snow from '../assets/snowflake.png';
+import PartialyCloudy from '../assets/partially-cloudy.png';
+import Rainy from '../assets/rainy.png';
+import Snowy from '../assets/snowy.png';
+import Windy from '../assets/windy.png';
+import Stormy from '../assets/stormy.png';
+import FogHaze from '../assets/fog-haze.png';
 
 const Main = (props) => {
 
   let atmosphere = props.current_observation ? props.current_observation.atmosphere : ""; 
   let wind = props.current_observation ? props.current_observation.wind : ""; 
+
+  let showWeatherIcon = (condition) => {
+    condition = condition.toLowerCase()
+    if (condition == "cloudy" || condition == "partialy cloudy") {
+      return <img className="hover:scale-110 transition" src={Cloudy} alt="Cloudy"/>;
+    }
+    if (condition == "partly cloudy") {
+      return <img className="hover:scale-110 transition" src={PartialyCloudy} alt="Partialy Cloudy"/>;
+    }
+    else if(condition == "raining"){
+      return <img className="hover:scale-110 transition" src={Rainy} alt="Rain" />;
+    }
+    else if(condition == "snow"){
+      return <img className="hover:scale-110 transition" src={Snowy} alt="Cloudy" />;
+    }
+    else if(condition == "windy"){
+      return <img className="hover:scale-110 transition" src={Windy} alt="Cloudy" />;
+    }
+    else if(condition == "stormy"){
+      return <img className="hover:scale-110 transition" src={Stormy} alt="Cloudy" />;
+    }
+    else if(condition == "fogg" || condition == "haze"){
+      return <img className="hover:scale-110 transition" src={FogHaze} alt="Cloudy" />;
+    }
+    else{
+      return <img className="hover:scale-110 transition" src={Sunny} alt="Sun" />;
+    }
+  }
 
   return (
     <div className={`h-full w-2/3 mr-5 rounded-xl px-10 py-5 flex flex-col justify-between ${props.isDarkMode ? 'dark-bg-contrast dark-shadow' : 'light-bg-contrast light-shadow'}`}>
@@ -27,13 +59,8 @@ const Main = (props) => {
             </div>
           </div>
           {/* For Image */}
-          <div className='w-[170px] mr-32'>
-            {/* data props ke through get krna uski basis pr yeh set hoga  */}
-            {1 && <img className="hover:scale-110 transition" src={Sun} alt="Sun" />}
-            {/* haze bhi hota hai */}
-            {/* 1 && <img className="hover:scale-110 transition" src={Rain} alt="Rain" /> */}
-            {/* 1 && <img className="hover:scale-110 transition" src={Cloudy} alt="Cloudy" /> */}
-            {/* 1 && <img className="hover:scale-110 transition" src={Snow} alt="Snow" /> */}
+          <div className='w-[200px] mr-32'>
+            {props.current_observation ? showWeatherIcon(props.current_observation.condition.text) : showWeatherIcon("no value") }
           </div>
         </div>
       </div>

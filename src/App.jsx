@@ -98,8 +98,8 @@ const App = () => {
   //   if (city) {
   //     fetchWeatherData();
   //   }
-  // }, [city]);  
-
+  // }, [city]); 
+  
 
   return (
     <div className={`w-full h-screen px-5 py-4 ${isDarkMode ? 'dark-bg' : 'light-bg'
