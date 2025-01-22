@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { City } from 'country-state-city';
 import { useDebounce } from 'use-debounce';
@@ -9,7 +9,12 @@ const Navbar = (props) => {
   const [suggestions, setSuggestions] = useState([]);
   const cities = useMemo(() => City.getAllCities(), []);
 
-  const handleSearch = (e) => setSearch(e.target.value);
+  const removeSuggestions = useRef()
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    removeSuggestions.current.style.display='block';
+  }
 
   useEffect(() => {
     if (debouncedSearch.length > 2) {
@@ -29,12 +34,18 @@ const Navbar = (props) => {
   const handleSuggestionClick = (city) => {
     setSearch(city);
     setSuggestions([]);
-    props.setCity(city);
+    props.setCity(city);    
+    removeSuggestions.current.style.display='none'
+    // code for remove suggestions
   };
 
   const searchCity = (e) => {
     e.preventDefault();
-    props.setCity(search);
+    if (search.trim()) {
+      props.setCity(search);
+    } else {
+      alert("Please enter a valid city name.");
+    }
   };
 
   return (
@@ -50,7 +61,8 @@ const Navbar = (props) => {
       </h3>
 
       <form
-        onSubmit={searchCity}
+        // onSubmit={searchCity}
+        onSubmit={(e)=>{searchCity(e)}}
         className="flex justify-between items-center rounded-xl bg-white px-4 py-1"
       >
         <input
@@ -67,13 +79,13 @@ const Navbar = (props) => {
         >
           <FaSearch />
         </button>
-
+            <div  ref={removeSuggestions} className='absolute top-16 w-[400px]'>
         {suggestions.length > 0 ? (
           <ul
-            className="absolute top-16 w-[400px] bg-white border rounded-lg shadow-lg z-10"
+            className="bg-white border rounded-lg shadow-lg z-10"
             role="listbox"
           >
-            {suggestions.slice(0, 7).map((city, index) => (
+            {suggestions.slice(0, 9).map((city, index) => (
               <li
                 key={index}
                 role="option"
@@ -85,10 +97,11 @@ const Navbar = (props) => {
             ))}
           </ul>
         ) : search.length > 2 ? (
-          <p className="absolute top-16 w-[400px] bg-white border rounded-lg shadow-lg z-10 px-4 py-2 text-gray-500">
+          <p  className="bg-white border rounded-lg shadow-lg z-10 px-4 py-2 text-gray-500">
             No cities found.
           </p>
         ) : null}
+            </div>
       </form>
 
       <button
