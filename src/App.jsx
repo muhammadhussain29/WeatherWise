@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from './components/Navbar';
 import Body from './components/Body';
+import Loader from './components/Loader';
 
 const App = () => {
   
@@ -10,6 +11,7 @@ const App = () => {
   const [current_observation, setCurrent_observation] = useState("")
   const [forecasts, setForecasts] = useState("")
   const [location, setLocation] = useState("")
+  const [isLoading, setIsLoading] = useState(true); // Loading state
 
   // Function to toggle dark mode
   const switchDarkMode = () => {
@@ -73,6 +75,7 @@ const App = () => {
     };
 
     try {
+      setIsLoading(true)
       const response = await axios.request(options);
       console.log("Weather Data:", response.data);
 
@@ -80,16 +83,18 @@ const App = () => {
       setCurrent_observation(response.data.current_observation);
       setForecasts(response.data.forecasts);
       setLocation(response.data.location);
+      setIsLoading(false)
     } catch (error) {
       console.error("Error fetching weather data:", error.message);
     }
   };
 
-  // // Effect to fetch location and weather on the first render
+  // Effect to fetch location and weather on the first render
   // useEffect(() => {
   //   const fetchLocationAndWeather = async () => {
   //     await handleLocationClick(); // Get location
   //   };
+  //   setIsLoading(false)
   //   fetchLocationAndWeather();
   // }, []);
 
@@ -98,15 +103,17 @@ const App = () => {
   //   if (city) {
   //     fetchWeatherData();
   //   }
-  // }, [city]); 
-  
+  // }, [city]);   
 
   return (
+    <>
+    <Loader isLoading={isLoading} isDarkMode={isDarkMode}/>
     <div className={`w-full h-screen px-5 py-4 ${isDarkMode ? 'dark-bg' : 'light-bg'
       }`}>
       <Navbar isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} setCity={setCity} />
       <Body isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} location={location} forecasts={forecasts} current_observation={current_observation}/>
     </div>
+    </>
   );
 };
 

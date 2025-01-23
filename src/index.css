@@ -9,6 +9,19 @@ body{
 .playwrite{
     font-family: "Playwrite IN", serif !important;
 }
+/* Loader Animation ---------------------------------------------------------------- */
+.loader{
+    animation: loader 1.5s ease-in-out 0s infinite forwards;
+}
+@keyframes loader{
+    50%{
+        transform: scale(1.15);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
 /* Light Theme --------------------------------------------------------------------- */
 .light-bg{
     background-color: #FFFFFF;
