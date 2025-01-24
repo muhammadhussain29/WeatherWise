@@ -11,7 +11,7 @@ const App = () => {
   const [current_observation, setCurrent_observation] = useState("")
   const [forecasts, setForecasts] = useState("")
   const [location, setLocation] = useState("")
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   // Function to toggle dark mode
   const switchDarkMode = () => {
@@ -108,7 +108,7 @@ const App = () => {
   return (
     <>
     <Loader isLoading={isLoading} isDarkMode={isDarkMode}/>
-    <div className={`w-full h-screen px-5 py-4 ${isDarkMode ? 'dark-bg' : 'light-bg'
+    <div className={`w-full min-h-screen max-h-full px-5 py-4 ${isDarkMode ? 'dark-bg' : 'light-bg'
       }`}>
       <Navbar isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} setCity={setCity} />
       <Body isDarkMode={isDarkMode} switchDarkMode={switchDarkMode} location={location} forecasts={forecasts} current_observation={current_observation}/>

@@ -50,11 +50,11 @@ const Navbar = (props) => {
 
   return (
     <nav
-      className={`flex justify-between items-center px-10 py-3 mb-4 rounded-xl ${props.isDarkMode ? 'dark-bg-contrast dark-shadow' : 'light-bg-contrast light-shadow'
+      className={`flex md:flex-row flex-col gap-5 justify-between items-center px-10 py-3 mb-4 rounded-xl ${props.isDarkMode ? 'dark-bg-contrast dark-shadow' : 'light-bg-contrast light-shadow'
         }`}
     >
       <h3
-        className={`capitalize text-2xl font-bold playwrite ${props.isDarkMode ? 'dark-primary' : 'light-primary'
+        className={`capitalize lg:text-2xl md:text-xl text-lg font-bold playwrite ${props.isDarkMode ? 'dark-primary' : 'light-primary'
           }`}
       >
         WeatherWise
@@ -63,14 +63,14 @@ const Navbar = (props) => {
       <form
         // onSubmit={searchCity}
         onSubmit={(e)=>{searchCity(e)}}
-        className="flex justify-between items-center rounded-xl bg-white px-4 py-1"
+        className="flex justify-between items-center rounded-xl bg-white md:px-4 px-2 py-1"
       >
         <input
           type="search"
           placeholder="Plan Ahead: Check Weather by City"
           value={search}
           onChange={handleSearch}
-          className="outline-none border-none w-[400px]"
+          className="outline-none border-none lg:w-[380px] md:w-[280px]"
         />
         <button
           type="submit"
@@ -79,7 +79,7 @@ const Navbar = (props) => {
         >
           <FaSearch />
         </button>
-            <div  ref={removeSuggestions} className='absolute top-16 w-[400px]'>
+            <div  ref={removeSuggestions} className='absolute md:top-16 top-28 lg:w-[380px] md:w-[280px]'>
         {suggestions.length > 0 ? (
           <ul
             className="bg-white border rounded-lg shadow-lg z-10"
@@ -106,7 +106,7 @@ const Navbar = (props) => {
 
       <button
         onClick={props.switchDarkMode}
-        className={`rounded-xl w-[140px] text-center py-2 ml-16 font-medium ${props.isDarkMode ? 'dark-secondary dark-btn' : 'light-secondary light-btn'
+        className={`rounded-xl w-[140px] text-center py-2 lg:ml-16 md:ml-4 ml-0 font-medium ${props.isDarkMode ? 'dark-secondary dark-btn' : 'light-secondary light-btn'
           }`}
       >
         {props.isDarkMode ? 'Go Light' : 'Go Dark'}

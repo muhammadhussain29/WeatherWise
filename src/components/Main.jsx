@@ -43,29 +43,29 @@ const Main = (props) => {
   }
 
   return (
-    <div className={`h-full w-2/3 mr-5 rounded-xl px-10 py-5 flex flex-col justify-between ${props.isDarkMode ? 'dark-bg-contrast dark-shadow' : 'light-bg-contrast light-shadow'}`}>
+    <div className={`h-full md:w-2/3 w-full mr-5 rounded-xl px-10 py-5 flex flex-col justify-between ${props.isDarkMode ? 'dark-bg-contrast dark-shadow' : 'light-bg-contrast light-shadow'}`}>
       <div>
-        <h2 className={`text-3xl font-medium mb-5 ${ props.isDarkMode ? 'dark-secondary' : 'light-secondary'}`}>Today's Weather</h2>
+        <h2 className={`md:text-4xl text-2xl font-medium mb-5 md:text-left text-center ${ props.isDarkMode ? 'dark-secondary' : 'light-secondary'}`}>Today's Weather</h2>
         {/* Main upper section */}
-        <div className="flex justify-between items-center">
+        <div className="flex md:flex-row flex-col justify-between items-center">
           {/* Temperature */}
           {/* then text ex: mostly cloudy */}
-          <div className='flex flex-col items-center'>
-            <h2 className={`text-9xl font-medium ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>{props.current_observation ? props.current_observation.condition.temperature : "00" }<span>&deg;c</span></h2>
+          <div className='flex flex-col items-end'>
+            <h2 className={`lg:text-9xl md:text-8xl text-7xl font-medium ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>{props.current_observation ? props.current_observation.condition.temperature : "00" }<span>&deg;c</span></h2>
             <div className='flex items-center w-full'>
               <div className={`w-full h-1 bg-black rounded-full ${props.isDarkMode ? 'dark-bg-primary' : 'light-bg-primary'}`}></div>
-            <h4 className={`text-4xl outfit mx-2 text-nowrap ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>{props.current_observation ? props.current_observation.condition.text : "------" }</h4>
+            <h4 className={`md:text-4xl text-2xl outfit mx-2 text-nowrap ${ props.isDarkMode ? 'dark-primary' : 'light-primary'}`}>{props.current_observation ? props.current_observation.condition.text : "------" }</h4>
               <div className={`w-full h-1 bg-black rounded-full ${props.isDarkMode ? 'dark-bg-primary' : 'light-bg-primary'}`}></div>
             </div>
           </div>
           {/* For Image */}
-          <div className='w-[200px] mr-32'>
+          <div className='w-[200px] lg:mx-10 mx-0'>
             {props.current_observation ? showWeatherIcon(props.current_observation.condition.text) : showWeatherIcon("no value") }
           </div>
         </div>
       </div>
       {/* Main lower section */}
-      <div className="flex justify-between items-center mt-8">
+      <div className="flex md:flex-row flex-col justify-center items-center md:mt-8 mt-4 md:gap-6 gap-3 flex-wrap">
         {/* // humidity pressure visibility */}
         <WeatherBox isDarkMode={props.isDarkMode} type={"Humidity"} value={atmosphere.humidity} />
         <WeatherBox isDarkMode={props.isDarkMode} type={"Visibility"} value={atmosphere.visibility} />
