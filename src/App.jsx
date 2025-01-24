@@ -90,20 +90,20 @@ const App = () => {
   };
 
   // Effect to fetch location and weather on the first render
-  // useEffect(() => {
-  //   const fetchLocationAndWeather = async () => {
-  //     await handleLocationClick(); // Get location
-  //   };
-  //   setIsLoading(false)
-  //   fetchLocationAndWeather();
-  // }, []);
+  useEffect(() => {
+    const fetchLocationAndWeather = async () => {
+      await handleLocationClick(); // Get location
+    };
+    setIsLoading(false)
+    fetchLocationAndWeather();
+  }, []);
 
-  // // Effect to fetch weather when the city changes
-  // useEffect(() => {
-  //   if (city) {
-  //     fetchWeatherData();
-  //   }
-  // }, [city]);   
+  // Effect to fetch weather when the city changes
+  useEffect(() => {
+    if (city) {
+      fetchWeatherData();
+    }
+  }, [city]);   
 
   return (
     <>
