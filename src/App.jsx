@@ -69,7 +69,9 @@ const App = () => {
         u: "c",
       },
       headers: {
-        "x-rapidapi-key": "706f5ebbecmsh149114f2bf43afdp1a6329jsn0dd215c8fc80",
+        // 'x-rapidapi-key': 'b23f1471f5msh7e3ff14218c3251p145e80jsnfa1d1b6f02e6',
+        // "x-rapidapi-key": "706f5ebbecmsh149114f2bf43afdp1a6329jsn0dd215c8fc80",
+        "x-rapidapi-key": "3260cddea7msh319ce07a3928c32p1156b0jsn16a7130c376e",
         "x-rapidapi-host": "yahoo-weather5.p.rapidapi.com",
       },
     };
